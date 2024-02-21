@@ -6,17 +6,36 @@ import com.example.testing.semester.Services.AsignaturaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("api/v1/asignatura")
+@RequestMapping("/api/v1/asignatura")
 public class AsignaturaController {
 
     @Autowired
-    AsignaturaService asignaturaService;
-    public ResponseEntity<Asignatura> addAsignatura(@RequestParam Asignatura asignatura){
+    private AsignaturaService asignaturaService;
 
-        return ResponseEntity.ok(asignaturaService.addAsignatura());
+    // Mostrar la página principal con el formulario y la lista de asignaturas
+    @GetMapping("")
+    public String showForm(Model model) {
+        model.addAttribute("asignatura", new Asignatura()); // Objeto para el formulario
+        model.addAttribute("asignaturas", asignaturaService.getAllAsignaturas()); // Lista para mostrar
+        return "asignaturas"; // Nombre del archivo HTML (asignaturas.html)
+    }
+
+    // Agregar o actualizar asignatura
+    @PostMapping("/save")
+    public String addOrUpdateAsignatura(@ModelAttribute Asignatura asignatura) {
+        asignaturaService.saveOrUpdateAsignatura(asignatura);
+        return "redirect:/api/v1/asignatura";
+    }
+
+    // Eliminar asignatura
+    @GetMapping("/delete/{id}")
+    public String deleteAsignatura(@PathVariable Long id) {
+        asignaturaService.deleteAsignatura(id);
+        return "redirect:/api/v1/asignatura";
     }
 }
+

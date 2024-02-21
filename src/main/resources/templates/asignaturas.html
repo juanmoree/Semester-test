@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Asignaturas</title>
+    <!-- Estilos de Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="card-title mb-0">Agregar/Actualizar Asignatura</h2>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/api/v1/asignatura/save}" th:object="${asignatura}" method="post">
+                        <input type="hidden" th:field="*{id}" />
+                        <div class="form-group">
+                            <label for="nombre">Nombre:</label>
+                            <input type="text" class="form-control" id="nombre" th:field="*{nombre}" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h2 class="card-title mb-0">Listado de Asignaturas</h2>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="asignatura : ${asignaturas}">
+                            <td th:text="${asignatura.nombre}"></td>
+                            <td>
+                                <a href="#" class="btn btn-danger btn-sm" th:href="@{/api/v1/asignatura/delete/{id}(id=${asignatura.id})}">Eliminar</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Dentro de la misma vista de asignaturas.html, agregamos una sección para niveles -->
+        <div class="col-md-6 mt-4">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h2 class="card-title mb-0">Gestión de Niveles</h2>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/api/v1/asignatura/niveles/save}" method="post">
+                        <input type="hidden" name="id" /> <!-- Ajusta según tu modelo de datos -->
+                        <div class="form-group">
+                            <label for="nivelNombre">Nombre del Nivel:</label>
+                            <input type="text" class="form-control" id="nivelNombre" name="nombre" />
+                        </div>
+                        <div class="form-group">
+                            <label for="asignaturaId">Asignatura ID:</label>
+                            <input type="number" class="form-control" id="asignaturaId" name="asignaturaId" />
+                        </div>
+                        <!-- Añadir más campos según sea necesario -->
+                        <button type="submit" class="btn btn-info">Guardar Nivel</button>
+                    </form>
+                    <!-- Listado de niveles para la asignatura seleccionada (Implementar lógica para seleccionar y mostrar niveles) -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

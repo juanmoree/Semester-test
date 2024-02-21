@@ -18,6 +18,6 @@ public class Usuario {
 
     @Column(name = "nombre", nullable = false)
     private String nombreUsuario;
-    private String correoUsuario;
+    private String correo;
     private String contrasena;
 }

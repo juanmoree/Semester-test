@@ -18,6 +18,6 @@ public class Pregunta {
     private String texto;
 
     @ManyToOne
-    @JoinColumn(name = "pregunta_id")
-    private Pregunta pregunta;
+    @JoinColumn(name = "nivel_id")
+    private Nivel nivel;
 }
