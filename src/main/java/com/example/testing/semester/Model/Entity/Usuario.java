@@ -1,3 +1,4 @@
+/*
 package com.example.testing.semester.Model.Entity;
 
 import jakarta.annotation.Nonnull;
@@ -21,3 +22,4 @@ public class Usuario {
     private String correo;
     private String contrasena;
 }
+*/

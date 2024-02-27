@@ -1,3 +1,4 @@
+/*
 package com.example.testing.semester.Controllers;
 
 import com.example.testing.semester.Model.Entity.Usuario;
@@ -30,3 +31,4 @@ public class AuthController {
     }
 
 }
+*/

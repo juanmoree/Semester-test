@@ -1,9 +1,0 @@
-package com.example.testing.semester.Controllers;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-@Controller
-@RequestMapping("api/v1/pregunta")
-public class PreguntaController {
-}
